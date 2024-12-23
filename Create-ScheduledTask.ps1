@@ -11,7 +11,7 @@ $Trigger.Subscription = "<QueryList><Query Id=`"0`" Path=`"Microsoft-Windows-Net
 $GroupName = Get-LocalGroup -SID "S-1-5-32-545"
 
 # Define additional variables containing scheduled task action and scheduled task principal
-$A = New-ScheduledTaskAction -Execute powershell.exe -Argument "-executionpolicy bypass -WindowStyle Hidden -NonInteraktive -NoLogo -file C:\ProgramData\GSAscripts\Detect-CorpNetwork.ps1"
+$A = New-ScheduledTaskAction -Execute powershell.exe -Argument "-executionpolicy bypass -WindowStyle Hidden -file C:\ProgramData\GSAscripts\Detect-CorpNetwork.ps1"
 $P = New-ScheduledTaskPrincipal -GroupId $GroupName -RunLevel Limited
 $S = New-ScheduledTaskSettingsSet -Compatibility Win8 -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries -DontStopOnIdleEnd
 
