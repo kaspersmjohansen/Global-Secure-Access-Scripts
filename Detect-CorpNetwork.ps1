@@ -3,7 +3,7 @@ $PrivateConnectorFQDN = "srvapc01.johansen.local"
 $PrivateConnectorIP = "192.168.30.245"
 $HostCheck = "DNS" #IP or #FQDN or #DNS
 
-# Registry kay and value
+# Registry key and value
 $GSAregkey = "HKCU:\Software\Microsoft\Global Secure Access Client"
 $GSAregvalue = "IsPrivateAccessDisabledByUser"
 
