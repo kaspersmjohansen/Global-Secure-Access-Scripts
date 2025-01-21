@@ -114,7 +114,7 @@ Try {
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '13/12/2024'
+    [String]$appScriptDate = '20/01/2025'
     [String]$appScriptAuthor = 'Kasper Johansen, https://kasperjohansen.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -206,22 +206,24 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'GlobalSecureAccessInstaller*.exe' -Parameters "/install /quiet /norestart /log `"$configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"Install"+".log")`""
-        
+        Execute-Process -Path 'GlobalSecureAccessClient.exe' -Parameters "/install /quiet /norestart /log `"$configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"Install"+".log")`""        
 
         ##*===============================================
         ##* POST-INSTALLATION
         ##*===============================================
         [String]$installPhase = 'Post-Installation'
 
+        # Restrict nonprivileged users from disabling og enabling the GSA client - 1 = restricted 0 = not retricted (Default)
+        Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Global Secure Access Client' -Name 'RestrictNonPrivilegedUsers' -Type 'DWord' -Value '1'
+
         # Show/hide Sign out button - 0 = show 1 = hide (Default)
         Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Global Secure Access Client' -Name 'HideSignOutButton' -Type 'DWord' -Value '1'
 
-        # Show/hide Sign Disable Private Access button - 0 = show 1 = hide (Default)
+        # Show/hide Disable Private Access button - 0 = show 1 = hide (Default)
         Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Global Secure Access Client' -Name 'HideDisablePrivateAccessButton' -Type 'DWord' -Value '1'
 
-        # Show/hide Disable button - 0 = show (Default) 1 = hide
-        Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Global Secure Access Client' -Name 'HideDisableButton' -Type 'DWord' -Value '0' 
+        # Show/hide Disable button - 1 = hide 0 = show (Default)
+        Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Global Secure Access Client' -Name 'HideDisableButton' -Type 'DWord' -Value '1' 
 
         # Change the default FarKdcTimeout - https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-kerberos-sso#how-to-avoid-kerberos-negative-caching-on-windows-machines 
         Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters' -Name 'FarKdcTimeout' -Type 'DWord' -Value '0'
