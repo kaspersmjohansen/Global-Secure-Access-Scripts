@@ -1,10 +1,11 @@
 <#PSScriptInfo
 .SYNOPSIS
-    Script to create a scheduled task to detect network changes and based on change either disable or enable Global Secure Global Access Private Access
+    Script detect network changes and based on change either disable or enable Global Secure Global Access Private Access
  
 .DESCRIPTION
-    This script will create a scheduled task which executes when a network change occurs. The scheduled task is configured to run in user context and
-    executes a powershell script that creates a registry value based on whether the device is on a corporate network or remote network. This disables 
+    This script will detect when a NIC network change occurs. The script should be executed in user context as it creates a 
+    registry value based on whether the device is on a corporate network or remote network. The registry value either enable 
+    Global Secure Access Private Access when the Windows device is not on a corporate network or disables  
     Global Secure Access Private Access when on a corporate network.
 
 .PARAMETER NetworkCheck
