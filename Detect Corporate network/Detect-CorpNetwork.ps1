@@ -11,6 +11,10 @@
 .PARAMETER NetworkCheck
     Configure the network check to perform. DNS, FQDN and IP are accepted values.
 
+    DNS = Check for a DNS suffix, configured in the DNSSuffix variable
+    FQDN = Check if a FQDN can be resolved, configured in the HosFQDN variable
+    IP = Check if a specific IP address answers ping requests, configured in the HostIP variable
+
 .PARAMETER DNSSuffix
     If "DNS" is configured in the NetworkCheck parameter, specify a DNS suffix.
 
@@ -19,18 +23,12 @@
 
 .PARAMETER HostIP
     If "IP" is configured in the NetworkCheck parameter, specify the IP address to ping.
-        
-.EXAMPLE
-    .\Detect-CorpNetwork.ps1 -NetworkCheck DNS -DNSSuffix "domain.local" 
-        Network check is performed using the DNS suffix configured on the primary NIC
-
-    .\Detect-CorpNetwork.ps1 -NetworkCheck FQDN -HostFQDN "domaincontroller.domain.local" 
-        Network check is performed using the FQDN name resolution of a host on the network.
-    
-    .\Detect-CorpNetwork.ps1 -NetworkCheck DNS -HostIP "192.168.1.1" 
-        Network check is performed using the IP address of a host/device on the network.
 
 .NOTES
+
+.TODO
+
+Configure a fallback feature. If a check fails do another check before disabling or enabling Global Secure Access Private Access.
        
 .AUTHOR
     Kasper Johansen 
@@ -45,16 +43,12 @@
 .CHANGELOG
     24-02-2025 - 1.0.0 - Release to public
 #>
-param(
-    [Parameter(Mandatory = $true)][ValidateSet("DNS","FQDN","IP")]
-    [string]$NetworkCheck,
-    [Parameter(Mandatory = $false)]
-    [string]$DNSSuffix,
-    [Parameter(Mandatory = $false)]
-    [string]$HostFQDN,
-    [Parameter(Mandatory = $false)]
-    [string]$HostIP
-)
+
+# Script variables
+$NetworkCheck = "DNS"
+$DNSSuffix = ""
+$HostFQDN = ""
+$HostIP = ""
 
 # GSA client disable private access user registry key and value
 $GSAregkey = "HKCU:\Software\Microsoft\Global Secure Access Client"
