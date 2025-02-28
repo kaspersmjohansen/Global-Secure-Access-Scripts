@@ -29,6 +29,7 @@
 .TODO
 
 Configure a fallback feature. If a check fails do another check before disabling or enabling Global Secure Access Private Access.
+Configure logging of script actions to ease troubleshooting scenrios
        
 .AUTHOR
     Kasper Johansen 
