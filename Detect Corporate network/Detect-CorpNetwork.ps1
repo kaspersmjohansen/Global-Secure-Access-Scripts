@@ -38,14 +38,14 @@ Configure a fallback feature. If a check fails do another check before disabling
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
-    24-02-2025 - 1.0.0 - Release to public
+    28-02-2025 - 1.0.0 - Release to public
 
 .CHANGELOG
-    24-02-2025 - 1.0.0 - Release to public
+    28-02-2025 - 1.0.0 - Release to public
 #>
 
 # Script variables
-$NetworkCheck = "DNS"
+$NetworkCheck = ""
 $DNSSuffix = ""
 $HostFQDN = ""
 $HostIP = ""
