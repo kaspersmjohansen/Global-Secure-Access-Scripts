@@ -153,5 +153,4 @@ If ($NetworkCheck -eq "DNS")
                             Write-Host "Global Secure Access client is: ENABLED" -ForegroundColor Cyan
                             Set-RegistryValue -RegPath $GSAregkey -RegName $GSAregvalue -RegValue "1" -RegType "Dword"
                         }
-                }
-                    
+                }                    
