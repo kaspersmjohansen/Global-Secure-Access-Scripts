@@ -114,7 +114,7 @@ Try {
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '20/01/2025'
+    [String]$appScriptDate = '24/02/2025'
     [String]$appScriptAuthor = 'Kasper Johansen, https://kasperjohansen.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
