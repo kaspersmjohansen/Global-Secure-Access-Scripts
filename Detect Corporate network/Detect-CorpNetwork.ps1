@@ -39,10 +39,10 @@ Configure logging of script actions to ease troubleshooting scenrios
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
-    28-02-2025 - 1.0.0 - Release to public
+    01-03-2025 - 1.0.0 - Release to public
 
 .CHANGELOG
-    28-02-2025 - 1.0.0 - Release to public
+    01-03-2025 - 1.0.0 - Release to public
 #>
 
 # Script variables
@@ -95,8 +95,8 @@ function Set-RegistryValue
 If ($NetworkCheck -eq "DNS")
 {
     Write-Host "Determine corp network access based on DNS suffix" -ForegroundColor Cyan
-    # Get active and connected Network Interface Card - Exclude Hyper-V virtual ethernet switches and Hyper-V network adapters
-    $ActivePhysicalNIC = Get-NetAdapter | Where-Object {$_.Status -ne "Disconnected" -and $_.InterfaceDescription -notlike "Hyper-V Virtual Ethernet*"}
+    # Get active and connected Network Interface Card
+    $ActivePhysicalNIC = Get-NetAdapter | Where-Object {$_.Status -ne "Disconnected"}
 
     # Get active network interface card IP configuration
     $IPconfiguration = Get-NetIPConfiguration -InterfaceIndex $ActivePhysicalNIC.ifIndex
@@ -112,12 +112,12 @@ If ($NetworkCheck -eq "DNS")
         {
             Write-Host "On unknown network" -ForegroundColor Cyan
             Write-Host "Global Secure Access client is: ENABLED" -ForegroundColor Cyan
-            Set-RegistryValue -RegPath $GSAregkey -RegName $GSAregvalue -RegValue "1" -RegType "Dword"
+            Set-RegistryValue -RegPath $GSAregkey -RegName $GSAregvalue -RegValue "0" -RegType "Dword"
         }
 }
         If ($NetworkCheck -eq "FQDN")
         {
-            Write-Host "Determine corp network access based on resolving FQDN" -ForegroundColor Cyan
+            Write-Host "Determine corp network access based on resolving FQDN - $HostFQDN" -ForegroundColor Cyan
             If (Resolve-DnsName -Name $HostFQDN -Type A -ErrorAction SilentlyContinue)
             {
                 Write-Host "Resolved FQDN: $HostFQDN" -ForegroundColor Cyan
@@ -129,12 +129,12 @@ If ($NetworkCheck -eq "DNS")
                 {
                     Write-Host "On unknown network" -ForegroundColor Cyan
                     Write-Host "Global Secure Access client is: ENABLED" -ForegroundColor Cyan
-                    Set-RegistryValue -RegPath $GSAregkey -RegName $GSAregvalue -RegValue "1" -RegType "Dword"
+                    Set-RegistryValue -RegPath $GSAregkey -RegName $GSAregvalue -RegValue "0" -RegType "Dword"
                 }
         }               
                 If ($NetworkCheck -eq "IP")
                 {
-                    Write-Host "Determine corp network access based on IP ping" -ForegroundColor Cyan
+                    Write-Host "Determine corp network access based on IP ping - $HostIP" -ForegroundColor Cyan
                     If (Test-Connection $HostIP -Count 3 -Quiet -ErrorAction SilentlyContinue)
                     {
                         Write-Host "Pinged IP: $HostIP"-ForegroundColor Cyan
@@ -146,6 +146,6 @@ If ($NetworkCheck -eq "DNS")
                         {
                             Write-Host "On unknown network" -ForegroundColor Cyan
                             Write-Host "Global Secure Access client is: ENABLED" -ForegroundColor Cyan
-                            Set-RegistryValue -RegPath $GSAregkey -RegName $GSAregvalue -RegValue "1" -RegType "Dword"
+                            Set-RegistryValue -RegPath $GSAregkey -RegName $GSAregvalue -RegValue "0" -RegType "Dword"
                         }
                 }                    

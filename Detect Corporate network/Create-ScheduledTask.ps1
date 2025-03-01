@@ -39,8 +39,14 @@ $Trigger.Enabled = $true
 $Trigger.Subscription = "<QueryList><Query Id=`"0`" Path=`"Microsoft-Windows-NetworkProfile/Operational`"><Select Path=`"Microsoft-Windows-NetworkProfile/Operational`">*[System[Provider[@Name='Microsoft-Windows-NetworkProfile'] and EventID=4004]]</Select></Query></QueryList>"
 
 # Find Builtin\Users name on localized Windows
-
 $GroupName = Get-LocalGroup -SID "S-1-5-32-545"
+
+# Copy script file name to script file location
+If (!(Test-Path -Path "$ScriptFileLocation"))
+{
+    New-Item -Path "$ScriptFileLocation" -ItemType Directory -Force -Verbose
+}
+Copy-Item -Path "$PSScriptRoot\$ScriptFileName" -Destination "$ScriptFileLocation" -Force -Verbose
 
 # Define additional variables containing scheduled task action and scheduled task principal
 $A = New-ScheduledTaskAction -Execute powershell.exe -Argument "-executionpolicy bypass -WindowStyle Hidden -file `"$($ScriptFileLocation + "\" + $ScriptFileName)`""
