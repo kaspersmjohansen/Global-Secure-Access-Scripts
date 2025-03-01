@@ -17,10 +17,10 @@
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
-    24-02-2025 - 1.0.0 - Release to public
+    01-03-2025 - 1.0.0 - Release to public
 
 .CHANGELOG
-    24-02-2025 - 1.0.0 - Release to public
+    01-03-2025 - 1.0.0 - Release to public
 #>
 
 # Script variables
@@ -33,7 +33,7 @@ $ScheduledTaskPath = "\"
 
 # Define CIM object variables
 # This is needed for accessing the non-default trigger settings when creating a schedule task using Powershell
-$Class = cimclass MSFT_TaskEventTrigger root/Microsoft/Windows/TaskScheduler
+$Class = Get-CimClass MSFT_TaskEventTrigger root/Microsoft/Windows/TaskScheduler
 $Trigger = $class | New-CimInstance -ClientOnly
 $Trigger.Enabled = $true
 $Trigger.Subscription = "<QueryList><Query Id=`"0`" Path=`"Microsoft-Windows-NetworkProfile/Operational`"><Select Path=`"Microsoft-Windows-NetworkProfile/Operational`">*[System[Provider[@Name='Microsoft-Windows-NetworkProfile'] and EventID=4004]]</Select></Query></QueryList>"
