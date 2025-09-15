@@ -16,9 +16,9 @@
 #>
 
 param (
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]$TokenFileOutPutDir = "C:\temp",
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]$TokenFileName = "token.txt",
     [Parameter(Mandatory = $true)]
     $TenantID
