@@ -19,8 +19,8 @@ $Headers = @{
 }
 
 # Current and new application name
-$ApplicationName = "New File Server"
-$NewApplicationName = "Brand new File Server"
+$ApplicationName = ""
+$NewApplicationName = ""
 
 # Get id of application to rename
 $params = @{

@@ -19,7 +19,7 @@ $Headers = @{
 }
 
 # Get application Id
-$ApplicationName = "New File Server"
+$ApplicationName = ""
 $params = @{
     Method = 'Get'
     Uri = "https://graph.microsoft.com/beta/applications/?`$Filter=displayname eq '$ApplicationName'"
@@ -29,7 +29,7 @@ $App = Invoke-RestMethod @params
 $AppId = $App.value.id
 
 # Get applications segment Id
-$ApplicationSegmentName = "srvfile.domain.com"
+$ApplicationSegmentName = ""
 $params = @{
     Method = 'Get'
     Uri = "https://graph.microsoft.com/beta/applications/$AppId/onPremisesPublishing/segmentsConfiguration/microsoft.graph.IpSegmentConfiguration/ApplicationSegments?`$Filter=destinationHost eq '$ApplicationSegmentName'"

@@ -19,7 +19,7 @@ $Headers = @{
 }
 
 # Get application Id
-$ApplicationName = "New File Server"
+$ApplicationName = ""
 $params = @{
     Method = 'Get'
     Uri = "https://graph.microsoft.com/beta/applications/?`$Filter=displayname eq '$ApplicationName'"

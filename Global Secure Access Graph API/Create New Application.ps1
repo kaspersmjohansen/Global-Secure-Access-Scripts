@@ -19,7 +19,7 @@ $Headers = @{
 }
 
 # Prepare the request body for instantiating the Private Access app
-$ApplicationName = "New File Server"
+$ApplicationName = ""
 $Body = @{
     displayName = $ApplicationName
 } | ConvertTo-Json -Depth 99 -Compress
@@ -51,7 +51,7 @@ Invoke-RestMethod @params
 
 # Configure application segment
 $body = @{
-        destinationHost = "srvfile.domain.com"
+        destinationHost = ""
         protocol = "tcp"
         ports = @('445-445')
         destinationType = "fqdn"
